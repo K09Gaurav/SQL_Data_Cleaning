@@ -150,3 +150,30 @@ SET BaseAddress = SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)-1
 UPDATE Houses.dbo.Housing_data
 SET City = SUBSTRING(PropertyAddress, CHARINDEX(',',PropertyAddress)+1, LEN(PropertyAddress))
 
+-----------------------------------------------------------------------------------------------------
+
+--DO the same with Owner Address
+--We can do this using 2 ways 
+--previous and PARSENAME
+
+select SUBSTRING(OwnerAddress, 1, CHARINDEX(',',OwnerAddress)-1) AS OAddress 
+,OwnerAddress
+from Houses.dbo.Housing_data
+
+--Taken starting point of substring from 'position of coma' + 1
+--to length of col 
+select SUBSTRING(OwnerAddress, LEN(SUBSTRING(OwnerAddress, 1, CHARINDEX(',',OwnerAddress)+2)), LEN(OwnerAddress)) AS OCityAddress 
+,OwnerAddress
+from Houses.dbo.Housing_data
+
+
+with TEmp (OStateAddress)as (
+select SUBSTRING(OwnerAddress, LEN(SUBSTRING(OwnerAddress, 1, CHARINDEX(',',OwnerAddress)+2)), LEN(OwnerAddress)) 
+from Houses.dbo.Housing_data)
+select SUBSTRING(OStateAddress, 1,  CHARINDEX(',',OStateAddress)-1) AS STATEAddress
+from TEmp
+
+
+-----------------------
+
+--Now use 
