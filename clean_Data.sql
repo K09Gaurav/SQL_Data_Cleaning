@@ -81,3 +81,10 @@ from
 on a.ParcelID = b.ParcelID AND a.[UniqueID ]<>b.[UniqueID ]
 Where a.PropertyAddress is null
 
+--SInce there is no Null Value in Property address col we dont need to but
+--If we had Null values
+--We could have replaced the Null Value to "No Address Availaible"
+
+UPDATE Houses.dbo.Housing_data
+SET PropertyAddress = 'No Address Availaible'
+Where PropertyAddress is null
