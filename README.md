@@ -1,5 +1,8 @@
-# SQL_Data_Cleaning
+# SQL Project on Data Cleaning
+### Project work is done on Microsoft SQL Server management Server.
 In this Project i will be using SQL on Housing Data to Clean , Organize and delete Duplicate Data present in the Dataset. 
+
+Total Records = "56477" in each table
 
 ## Introduction
 
@@ -9,6 +12,7 @@ The housing dataset used in this project contains Data on Nashiviele Properties 
 2. Remove duplicate entries.
 3. Standardize and format data.
 4. Perform any necessary data transformations.
+
 ### Project Goals
 
   1. Data Quality Enhancement:
@@ -34,3 +38,15 @@ Before i begin, i ensured i had:
 - A working knowledge of SQL.
 - Access to a SQL database.
 - A tool for interacting with the database
+
+## Concepts used
+1. Select
+2. Join
+3. create and drop table
+3. Use Of distinct keyword
+4. Update and delete the data Present
+7. typecasting 
+8. max, min, avg, etc
+9. CTE
+10. Partition by
+11. Temp Tables
