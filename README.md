@@ -50,3 +50,5 @@ Before i begin, i ensured i had:
 9. CTE
 10. Partition by
 11. Temp Tables
+12. Substring
+13. Charindex

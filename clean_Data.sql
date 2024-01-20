@@ -176,4 +176,4 @@ from TEmp
 
 -----------------------
 
---Now use 
+--Now use PARSENAME
