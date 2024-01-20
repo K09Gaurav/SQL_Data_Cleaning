@@ -88,3 +88,21 @@ Where a.PropertyAddress is null
 UPDATE Houses.dbo.Housing_data
 SET PropertyAddress = 'No Address Availaible'
 Where PropertyAddress is null
+
+----------------------------------------------------------------------------------
+
+/*
+Unable to do the same with Owner Name
+as the Owner Name for missing Values are entirely Missing From The table there is no case like The address one
+*/
+-- So i will Just replace the null values with Name Not availaible
+
+UPDATE Houses.dbo.Housing_data
+SET OwnerName = 'No Address Availaible'
+Where OwnerName is null
+
+------------------------------
+
+/* Partitioning the property Column as the column contains very large values
+As it have Home,tow, city address as well
+*/
