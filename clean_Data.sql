@@ -106,3 +106,47 @@ Where OwnerName is null
 /* Partitioning the property Column as the column contains very large values
 As it have Home,tow, city address as well
 */
+
+-- The delimiter in the property col is a comma ','
+-- We can use substring to separate them BY FINDING the comma using CHARINDEX
+
+select SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)) AS Address ,PropertyAddress
+from Houses.dbo.Housing_data
+
+--Substring Starting position is 1 and ending position is CHARINDEX(',',PropertyAddress)
+
+
+--Removed comma from the end of address
+select SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)-1) AS Address ,PropertyAddress
+from Houses.dbo.Housing_data
+
+--For the City Name
+
+select SUBSTRING(PropertyAddress, CHARINDEX(',',PropertyAddress), LEN(PropertyAddress)) AS Address ,PropertyAddress
+from Houses.dbo.Housing_data
+ 
+ --Used Substring Starting position is CHARINDEX(',',PropertyAddress)+1  (+1 is used to remove the comma )
+ -- and ending position is LEN(PropertyAddress)
+
+ --Final Adress comparison
+ 
+select SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)-1) AS Address ,
+SUBSTRING(PropertyAddress, CHARINDEX(',',PropertyAddress)+1, LEN(PropertyAddress)) AS City,
+PropertyAddress
+from Houses.dbo.Housing_data
+
+
+--Now add both of these columns to the table by creating new ones
+
+ALTER TABLE Houses.dbo.Housing_data
+ADD BaseAddress varchar(60),
+	City varchar(30);
+
+--Input the values
+
+UPDATE Houses.dbo.Housing_data
+SET BaseAddress = SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)-1)
+
+UPDATE Houses.dbo.Housing_data
+SET City = SUBSTRING(PropertyAddress, CHARINDEX(',',PropertyAddress)+1, LEN(PropertyAddress))
+
