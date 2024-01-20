@@ -2,7 +2,7 @@
 ### Project work is done on Microsoft SQL Server management Server.
 In this Project i will be using SQL on Housing Data to Clean , Organize and delete Duplicate Data present in the Dataset. 
 
-Total Records = "56477" in each table
+Total Records = "56477" in The dataset
 
 ## Introduction
 
