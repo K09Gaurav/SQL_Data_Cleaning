@@ -282,3 +282,24 @@ ROW_NUMBER() OVER (
 from Houses..Housing_Data)
 DELETE from RowNUM where Row_NUMBERS >1
 
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+/*
+Completed the Project and Now exporting the Data
+
+Faced a few issues exporting the Data Directly from SSMS to excel
+Unable to solve the issue " potential lost conversion from varchar to longtext "
+
+Had to import the data from excel
+
+he solution worked
+
+go to Excel
+
+    click >on Data
+    click >from other sources
+    select>from sql server
+
+*/
