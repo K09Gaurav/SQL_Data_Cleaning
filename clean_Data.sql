@@ -110,6 +110,12 @@ As it have Home,tow, city address as well
 -- The delimiter in the property col is a comma ','
 -- We can use substring to separate them BY FINDING the comma using CHARINDEX
 
+--Syntax of them:
+
+-- SUBSTring(expression, start, length)
+--CHARINDEX ( expressionToFind , expressionToSearch [ , start_location ] )
+
+
 select SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)) AS Address ,PropertyAddress
 from Houses.dbo.Housing_data
 
@@ -177,3 +183,52 @@ from TEmp
 -----------------------
 
 --Now use PARSENAME
+--ParseName returns specified part of object
+--                                                           Starts from back
+
+--PARSENAME ('object_name' , object_piece )
+
+
+SELect
+PARSENAME(OwnerAddress, 1) as OwnerAddress,
+PARSENAME(OwnerAddress, 2) as OwnerAddress,
+PARSENAME(OwnerAddress, 3) as OwnerAddress
+from Houses..Housing_Data
+
+--This shows NULL as PARSENAME only delimiter is '.' but we have ',' in our addresses
+--WE will replace ',' with '.' then it will work
+
+
+SELect
+PARSENAME(REPLACE(OwnerAddress,',','.'), 1) as OwnerState,
+PARSENAME(REPLACE(OwnerAddress,',','.'), 2) as OwnercITY,
+PARSENAME(REPLACE(OwnerAddress,',','.'), 3) as OwnerAddress
+from Houses..Housing_Data
+
+--Works fine now update it into TABLE
+
+
+ALTER TABLE Houses..Housing_Data
+ADD OwnerBaseAddress varchar(70);
+
+
+ALTER TABLE Houses..Housing_Data
+ADD OwnerCity varchar(70);
+
+
+ALTER TABLE Houses..Housing_Data
+ADD OwnerState varchar(70);
+
+UPDATE Houses..Housing_Data
+SET OwnerBaseAddress = PARSENAME(REPLACE(OwnerAddress,',','.'), 3)
+
+
+UPDATE Houses..Housing_Data
+SET OwnercITY = PARSENAME(REPLACE(OwnerAddress,',','.'), 2)
+
+
+UPDATE Houses..Housing_Data
+SET OwnerState = PARSENAME(REPLACE(OwnerAddress,',','.'), 1)
+
+
+----------------------------------------------------------------------
