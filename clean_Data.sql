@@ -232,3 +232,22 @@ SET OwnerState = PARSENAME(REPLACE(OwnerAddress,',','.'), 1)
 
 
 ----------------------------------------------------------------------
+
+/*Sold as Vacant got 4 diff values instead of being only 4
+N Yes Y No 
+We have to change that to only Yes and No
+*/
+
+select SoldAsVacant
+from Houses..Housing_Data
+group by SoldAsVacant
+
+UPDATE Houses..Housing_Data
+SET SoldAsVacant = 'Yes'
+where SoldAsVacant = 'Y'
+
+UPDATE Houses..Housing_Data
+SET SoldAsVacant = 'No'
+where SoldAsVacant = 'N'
+
+-----------------------------------------------------------------
