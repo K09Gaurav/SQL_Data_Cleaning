@@ -250,4 +250,35 @@ UPDATE Houses..Housing_Data
 SET SoldAsVacant = 'No'
 where SoldAsVacant = 'N'
 
+
+--OR
+
+Update Houses..Housing_Data
+SET SoldAsVacant = CASE When SoldAsVacant = 'Y' THEN 'Yes'
+	   					When SoldAsVacant = 'N' THEN 'No'
+	   					ELSE SoldAsVacant
+	   				END
+
 -----------------------------------------------------------------
+
+-- Remove any duplicates if availaible
+
+--Finding Duplicates based on  ParcelID, SaleDateConverted and  LegalReference as all 3 of them combined shouldn't be same
+
+With RowNUM as (
+select *,
+ROW_NUMBER() OVER (
+	PARTITION BY ParcelID,SaleDateConverted, LegalReference order BY UniqueID ) as Row_NUMBERS
+from Houses..Housing_Data)
+select * from RowNUM where Row_NUMBERS >1
+
+--104 rows found which are duplicates
+
+
+With RowNUM as (
+select *,
+ROW_NUMBER() OVER (
+	PARTITION BY ParcelID,SaleDateConverted, LegalReference order BY UniqueID ) as Row_NUMBERS
+from Houses..Housing_Data)
+DELETE from RowNUM where Row_NUMBERS >1
+
